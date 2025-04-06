@@ -19,6 +19,7 @@ export const formSubmit = async (
   const validationResult = loginScheme.safeParse({ email, password });
   if (!validationResult.success) {
     const errors = validationResult.error.flatten().fieldErrors;
+    console.log(errors);
 
     return {
       errors: {
