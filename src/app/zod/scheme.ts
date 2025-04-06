@@ -52,7 +52,9 @@ export const passwordSchema = z
  * - パスワード: 8文字以上
  */
 export const loginScheme = z.object({
-  email: z.string().email(),
+  email: z
+    .string()
+    .email({ message: "メールアドレスの形式が正しくありません" }),
   password: passwordSchema,
 });
 

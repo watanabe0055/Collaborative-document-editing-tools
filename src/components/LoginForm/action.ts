@@ -14,7 +14,7 @@ const useAction = () => {
     const validationResult = loginScheme.safeParse({ email, password });
     if (!validationResult.success) {
       // エラーを処理する（例：エラーステートを設定）
-      console.error(validationResult.error.message);
+      console.error(validationResult.error.flatten().fieldErrors);
       return;
     }
 
