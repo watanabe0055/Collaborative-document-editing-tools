@@ -1,28 +1,23 @@
-import { loginScheme, type LoginScheme } from "@/app/zod/scheme";
+"use server";
 
-const useAction = () => {
-  const formSubmit = async (formData: FormData) => {
-    const email = formData.get("email");
-    const password = formData.get("password");
+import { loginScheme } from "@/app/zod/scheme";
 
-    if (typeof email !== "string" || typeof password !== "string") {
-      // エラーを処理する（例：エラーステートを設定）
-      console.error("メールアドレスとパスワードは文字列である必要があります");
-      return;
-    }
+export const formSubmit = async (formData: FormData) => {
+  const email = formData.get("email");
+  const password = formData.get("password");
 
-    const validationResult = loginScheme.safeParse({ email, password });
-    if (!validationResult.success) {
-      // エラーを処理する（例：エラーステートを設定）
-      console.error(validationResult.error.flatten().fieldErrors);
-      return;
-    }
+  if (typeof email !== "string" || typeof password !== "string") {
+    // エラーを処理する（例：エラーステートを設定）
+    console.error("メールアドレスとパスワードは文字列である必要があります");
+    return;
+  }
 
-    const validatedData: LoginScheme = validationResult.data;
-    // ログイン処理を続行
-  };
+  const validationResult = loginScheme.safeParse({ email, password });
+  if (!validationResult.success) {
+    // エラーを処理する（例：エラーステートを設定）
+    console.error(validationResult.error.flatten().fieldErrors);
+    return;
+  }
 
-  return { formSubmit };
+  return;
 };
-
-export default useAction;

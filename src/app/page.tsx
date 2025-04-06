@@ -1,8 +1,10 @@
+"use server";
+
 import { LoginForm } from "@/components/LoginForm/LoginForm";
 import { LogoutButton } from "../components/LogoutButton";
 import { SignupForm } from "@/components/SignupForm";
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       {/* <LogoutButton /> */}

@@ -1,4 +1,4 @@
-"use client";
+"use server";
 
 import type React from "react";
 
@@ -13,13 +13,12 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { AlertCircle } from "lucide-react";
+// import { Alert, AlertDescription } from "@/components/ui/alert";
+// import { AlertCircle } from "lucide-react";
 import Link from "next/link";
-import useAction from "./action";
+import { formSubmit } from "./action";
 
-export function LoginForm() {
-  const { formSubmit } = useAction();
+export async function LoginForm() {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
