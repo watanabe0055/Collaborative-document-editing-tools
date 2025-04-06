@@ -2,7 +2,6 @@
 
 import type React from "react";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -17,41 +16,10 @@ import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 import Link from "next/link";
+import useAction from "./action";
 
 export function LoginForm() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError(null);
-
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-
-    try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // In a real app, you would call your authentication API here
-      // const response = await signIn(email, password)
-
-      // Simulate successful login
-      console.log("Logged in with:", email, password);
-
-      // Redirect to dashboard or home page
-      // router.push("/dashboard")
-    } catch (err) {
-      setError(
-        "メールアドレスまたはパスワードが無効です。もう一度お試しください。"
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
+  const { formSubmit } = useAction();
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
@@ -61,13 +29,13 @@ export function LoginForm() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {error && (
+        <form action={formSubmit} className="space-y-4">
+          {/* {error && (
             <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>{error}</AlertDescription>
             </Alert>
-          )}
+          )} */}
           <div className="space-y-2">
             <Label htmlFor="email">メールアドレス</Label>
             <Input
@@ -97,8 +65,9 @@ export function LoginForm() {
               autoComplete="current-password"
             />
           </div>
-          <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? "ログイン中..." : "ログイン"}
+          <Button type="submit" className="w-full">
+            {/* {isLoading ? "ログイン中..." : "ログイン"} */}
+            ログイン
           </Button>
         </form>
       </CardContent>
