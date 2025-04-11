@@ -4,9 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { AlertCircle, Check, X } from "lucide-react";
-import { useActionState, useState } from "react";
+import { AlertCircle, X } from "lucide-react";
+import { useActionState, useMemo, useState } from "react";
 import type { SignUpFormState } from "../action";
+import { passwordMatchSchema } from "@/app/zod/scheme";
 
 const initialState: SignUpFormState = {
   errors: undefined,
@@ -19,6 +20,21 @@ const Form = ({
 }) => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+
+  const passwordValidationErrors = useMemo(() => {
+    if (password && passwordConfirm) {
+      const matchValidation = passwordMatchSchema.safeParse({
+        password,
+        passwordConfirm,
+      });
+
+      if (!matchValidation.success) {
+        const errors = matchValidation.error.flatten().fieldErrors;
+        return errors;
+      }
+    }
+    return null;
+  }, [password, passwordConfirm]);
 
   const [state, formAction, isPending] = useActionState(
     async (prevState: SignUpFormState, formData: FormData) => {
@@ -73,24 +89,6 @@ const Form = ({
           required
           autoComplete="new-password"
         />
-        {/* <div className="space-y-1 mt-2">
-          {passwordRequirements.map((req, index) => (
-            <div key={index} className="flex items-center text-sm">
-              {req.test(password) ? (
-                <Check className="h-4 w-4 mr-2 text-green-500" />
-              ) : (
-                <X className="h-4 w-4 mr-2 text-gray-400" />
-              )}
-              <span
-                className={
-                  req.test(password) ? "text-green-500" : "text-gray-500"
-                }
-              >
-                {req.text}
-              </span>
-            </div>
-          ))}
-        </div> */}
       </div>
       <div className="space-y-2">
         <Label htmlFor="passwordConfirm">パスワード（確認）</Label>
@@ -103,25 +101,13 @@ const Form = ({
           required
           autoComplete="new-password"
         />
-        {password && passwordConfirm && (
-          <div className="flex items-center text-sm mt-2">
-            {password === passwordConfirm ? (
-              <>
-                <Check className="h-4 w-4 mr-2 text-green-500" />
-                <span className="text-green-500">
-                  パスワードが一致しています
-                </span>
-              </>
-            ) : (
-              <>
-                <X className="h-4 w-4 mr-2 text-red-500" />
-                <span className="text-red-500">
-                  パスワードが一致していません
-                </span>
-              </>
-            )}
+
+        {passwordValidationErrors?.passwordConfirm?.map((error) => (
+          <div key={error} className="flex items-center text-sm mt-2">
+            <X className="h-4 w-4 mr-2 text-red-500" />
+            <span className="text-red-500">{error}</span>
           </div>
-        )}
+        ))}
       </div>
       <Button type="submit" className="w-full" disabled={isPending}>
         {isPending ? "アカウント作成中..." : "アカウントを作成"}

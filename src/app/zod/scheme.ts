@@ -30,19 +30,24 @@ export const passwordSchema = z
  * - メールアドレス: 有効なメールアドレス
  * - パスワード: 8文字以上
  * - パスワード（確認）: 8文字以上
+ * - パスワードとパスワード（確認）が一致する
  */
-export const signupScheme = z.object({
-  username: z
-    .string()
-    .min(3, { message: "3文字以上のユーザー名が必要です" })
-    .max(30, { message: "30文字以下のユーザー名が必要です" }),
-  email: z
-    .string()
-    .email({ message: "メールアドレスの形式が正しくありません" }),
-  password: passwordSchema,
-  passwordConfirm: passwordSchema,
-});
-
+export const signupScheme = z
+  .object({
+    username: z
+      .string()
+      .min(3, { message: "3文字以上のユーザー名が必要です" })
+      .max(30, { message: "30文字以下のユーザー名が必要です" }),
+    email: z
+      .string()
+      .email({ message: "メールアドレスの形式が正しくありません" }),
+    password: passwordSchema,
+    passwordConfirm: passwordSchema,
+  })
+  .refine((data) => data.password === data.passwordConfirm, {
+    message: "パスワードが一致しません",
+    path: ["passwordConfirm"],
+  });
 /**
  * サインアップのバリデーション要件を満たすデータの型
  *
@@ -70,3 +75,21 @@ export const loginScheme = z.object({
  * @description ログインスキーマの型推論結果
  */
 export type LoginScheme = z.infer<typeof loginScheme>;
+
+/**
+ * パスワード一致チェック専用のスキーマ
+ *
+ * @description 以下の要件を満たすデータを検証します：
+ * - パスワード: 8文字以上
+ * - パスワード（確認）: 8文字以上
+ * - パスワードとパスワード（確認）が一致する
+ */
+export const passwordMatchSchema = z
+  .object({
+    password: passwordSchema,
+    passwordConfirm: passwordSchema,
+  })
+  .refine((data) => data.password === data.passwordConfirm, {
+    message: "パスワードが一致しません",
+    path: ["passwordConfirm"],
+  });
