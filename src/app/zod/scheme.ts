@@ -1,26 +1,4 @@
 import { z } from "zod";
-/**
- * サインアップのバリデーション要件を定義するZodスキーマ
- *
- * @description 以下の要件を満たすデータを検証します：
- * - ユーザーネーム: 3文字以上30文字以下
- * - メールアドレス: 有効なメールアドレス
- * - パスワード: 8文字以上
- * - パスワード（確認）: 8文字以上
- */
-export const signupScheme = z.object({
-  username: z.string().min(3).max(30),
-  email: z.string().email(),
-  password: z.string().min(8),
-  passwordConfirm: z.string().min(8),
-});
-
-/**
- * サインアップのバリデーション要件を満たすデータの型
- *
- * @description サインアップスキーマの型推論結果
- */
-export type SignupScheme = z.infer<typeof signupScheme>;
 
 /**
  * パスワードのバリデーション要件を定義するZodスキーマ
@@ -43,6 +21,34 @@ export const passwordSchema = z
   .refine((value) => /[^A-Za-z0-9]/.test(value), {
     message: "特殊文字を1文字以上含める必要があります",
   });
+
+/**
+ * サインアップのバリデーション要件を定義するZodスキーマ
+ *
+ * @description 以下の要件を満たすデータを検証します：
+ * - ユーザーネーム: 3文字以上30文字以下
+ * - メールアドレス: 有効なメールアドレス
+ * - パスワード: 8文字以上
+ * - パスワード（確認）: 8文字以上
+ */
+export const signupScheme = z.object({
+  username: z
+    .string()
+    .min(3, { message: "3文字以上のユーザー名が必要です" })
+    .max(30, { message: "30文字以下のユーザー名が必要です" }),
+  email: z
+    .string()
+    .email({ message: "メールアドレスの形式が正しくありません" }),
+  password: passwordSchema,
+  passwordConfirm: passwordSchema,
+});
+
+/**
+ * サインアップのバリデーション要件を満たすデータの型
+ *
+ * @description サインアップスキーマの型推論結果
+ */
+export type SignupScheme = z.infer<typeof signupScheme>;
 
 /**
  * ログインのバリデーション要件を定義するZodスキーマ

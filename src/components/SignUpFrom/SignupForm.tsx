@@ -1,4 +1,6 @@
-"use server";
+"use client";
+
+import type React from "react";
 
 import {
   Card,
@@ -13,13 +15,13 @@ import Link from "next/link";
 import Form from "./Form/Form";
 import { formSubmit } from "./action";
 
-export async function LoginForm() {
+export function SignupForm() {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle className="text-2xl">ログイン</CardTitle>
+        <CardTitle className="text-2xl">アカウント作成</CardTitle>
         <CardDescription>
-          メールアドレスとパスワードを入力してアカウントにアクセスしてください
+          新しいアカウントを作成するために詳細を入力してください
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -27,9 +29,9 @@ export async function LoginForm() {
       </CardContent>
       <CardFooter className="flex justify-center">
         <p className="text-sm text-muted-foreground">
-          アカウントをお持ちでないですか？{" "}
-          <Link href="/signup" className="text-primary hover:underline">
-            新規登録
+          すでにアカウントをお持ちですか？{" "}
+          <Link href="/login" className="text-primary hover:underline">
+            ログイン
           </Link>
         </p>
       </CardFooter>
