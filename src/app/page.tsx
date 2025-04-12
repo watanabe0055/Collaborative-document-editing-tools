@@ -2,7 +2,7 @@
 
 import { LoginForm } from "@/components/LoginForm/LoginForm";
 import { LogoutButton } from "../components/LogoutButton";
-import { SignupForm } from "@/components/SignUpFrom/SignupForm";
+import { SignupForm } from "@/components/SignUpForm/SignupForm";
 
 export default async function Home() {
   return (
