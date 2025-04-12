@@ -1,12 +1,14 @@
-import { LoginForm } from "@/components/LoginForm";
-import { LogoutButton } from "../components/LogoutButton";
-import { SignupForm } from "@/components/SignupForm";
+"use server";
 
-export default function Home() {
+import { LoginForm } from "@/components/LoginForm/LoginForm";
+import { LogoutButton } from "../components/LogoutButton";
+import { SignupForm } from "@/components/SignUpForm/SignupForm";
+
+export default async function Home() {
   return (
     <>
-      <LogoutButton />
-      <LoginForm />
+      {/* <LogoutButton /> */}
+      {/* <LoginForm /> */}
       <SignupForm />
     </>
   );
