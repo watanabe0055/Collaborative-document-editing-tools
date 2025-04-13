@@ -1,6 +1,8 @@
 "use server";
 
+import { createClient } from "@/app/utils/supabase/server";
 import { loginScheme } from "@/app/zod/scheme";
+import { redirect } from "next/navigation";
 
 export type LoginFormState = {
   errors?: {
@@ -13,6 +15,8 @@ export type LoginFormState = {
 export const formSubmit = async (
   formData: FormData
 ): Promise<LoginFormState> => {
+  const supabase = await createClient();
+
   const email = formData.get("email");
   const password = formData.get("password");
 
@@ -29,5 +33,16 @@ export const formSubmit = async (
     };
   }
 
-  return {};
+  const { error } = await supabase.auth.signInWithPassword({
+    email: email?.toString() ?? "",
+    password: password?.toString() ?? "",
+  });
+  if (error) {
+    console.error(error);
+    return {
+      message: error.message,
+    };
+  }
+
+  return redirect("/");
 };
