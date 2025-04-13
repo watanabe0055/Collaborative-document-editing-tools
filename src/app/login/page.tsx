@@ -1,7 +1,6 @@
 "use server";
 
 import { LoginForm } from "@/components/LoginForm/LoginForm";
-import { LogoutButton } from "../components/LogoutButton";
 import { SignupForm } from "@/components/SignUpForm/SignupForm";
 
 export default async function Home() {
@@ -9,7 +8,7 @@ export default async function Home() {
     <>
       {/* <LogoutButton /> */}
       {/* <LoginForm /> */}
-      {/* <SignupForm /> */}
+      <SignupForm />
     </>
   );
 }
