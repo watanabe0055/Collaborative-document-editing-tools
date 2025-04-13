@@ -13,6 +13,7 @@ const initialState: SignUpFormState = {
   errors: undefined,
   message: undefined,
 };
+
 const Form = ({
   formSubmit,
 }: {

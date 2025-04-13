@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
+import { LogoutSubmit } from "./action";
+import { useTransition } from "react";
 
 interface LogoutButtonProps {
   variant?:
@@ -21,43 +22,27 @@ export function LogoutButton({
   size = "default",
   className = "",
 }: LogoutButtonProps) {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleLogout = async () => {
-    setIsLoading(true);
-
-    try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // In a real app, you would call your logout API here
-      // await signOut()
-
-      // Redirect to login page
-      // router.push("/login")
-
-      console.log("User logged out");
-    } catch (error) {
-      console.error("Logout failed", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
+  const [isPending, startTransition] = useTransition();
+  async function formAction() {
+    startTransition(async () => {
+      // サーバーアクションを呼び出すか、fetchを使った非同期処理
+      await LogoutSubmit();
+    });
+  }
   return (
     <Button
       variant={variant}
       size={size}
       className={className}
-      onClick={handleLogout}
-      disabled={isLoading}
+      onClick={formAction}
+      disabled={isPending}
     >
       {size === "icon" ? (
         <LogOut className="h-4 w-4" />
       ) : (
         <>
           <LogOut className="h-4 w-4 mr-2" />
-          {isLoading ? "ログアウト中..." : "ログアウト"}
+          {isPending ? "ログアウト中..." : "ログアウト"}
         </>
       )}
     </Button>
