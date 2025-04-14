@@ -14,7 +14,7 @@ export type LoginFormState = {
 
 export const formSubmit = async (
   formData: FormData
-): Promise<LoginFormState> => {
+): Promise<LoginFormState | never> => {
   const supabase = await createClient();
 
   const email = formData.get("email");
@@ -44,5 +44,8 @@ export const formSubmit = async (
     };
   }
 
-  return redirect("/");
+  // このコードは実行されませんが、型チェックを満たす
+  const response = {} as LoginFormState;
+  redirect("/");
+  return response;
 };

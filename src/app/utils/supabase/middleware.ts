@@ -7,8 +7,9 @@ export async function updateSession(request: NextRequest) {
   });
 
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_URL || "",
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
+
     {
       cookies: {
         getAll() {
@@ -29,6 +30,14 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
+  // 環境変数が設定されていない場合のエラーハンドリング
+  if (
+    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  ) {
+    console.error("Supabase環境変数が設定されていません");
+    // エラーページへリダイレクトするなどの処理を追加
+  }
   // Do not run code between createServerClient and
   // supabase.auth.getUser(). A simple mistake could make it very hard to debug
   // issues with users being randomly logged out.
