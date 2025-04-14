@@ -1,5 +1,6 @@
 "use server";
 
+import { createClient } from "@/app/utils/supabase/server";
 import { signupScheme } from "@/app/zod/scheme";
 
 export type SignUpFormState = {
@@ -15,6 +16,8 @@ export type SignUpFormState = {
 export const formSubmit = async (
   formData: FormData
 ): Promise<SignUpFormState> => {
+  const supabase = await createClient();
+
   const username = formData.get("username");
   const email = formData.get("email");
   const password = formData.get("password");
@@ -40,5 +43,13 @@ export const formSubmit = async (
     };
   }
 
+  const { error } = await supabase.auth.signUp({
+    email: email?.toString() ?? "",
+    password: password?.toString() ?? "",
+  });
+  console.log(error);
+  if (error) {
+    console.error(error);
+  }
   return {};
 };
