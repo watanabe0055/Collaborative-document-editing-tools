@@ -15,7 +15,7 @@ import Link from "next/link";
 import Form from "./Form/Form";
 import { formSubmit } from "./action";
 
-export function SignupForm() {
+export default function SignupForm() {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>

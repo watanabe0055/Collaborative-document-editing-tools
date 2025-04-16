@@ -13,7 +13,7 @@ import Link from "next/link";
 import Form from "./Form/Form";
 import { formSubmit } from "./action";
 
-export async function LoginForm() {
+export default async function LoginForm() {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
