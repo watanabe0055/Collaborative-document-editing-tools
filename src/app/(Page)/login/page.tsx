@@ -1,13 +1,11 @@
 "use server";
 
 import { LoginForm } from "@/components/LoginForm/LoginForm";
-import { SignupForm } from "@/components/SignUpForm/SignupForm";
 
-export default async function Home() {
+export default async function LoginPage() {
   return (
     <>
       <LoginForm />
-      {/* <SignupForm /> */}
     </>
   );
 }
