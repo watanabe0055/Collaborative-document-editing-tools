@@ -17,15 +17,18 @@ jobs:
       run:
         working-directory: ${{ env.WORKING_DIRECTORY }}
     steps:
-      - name: Checkout code
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: 1.2.2
-          cache-dependency-path: "**/package-lock.json"
-      - name: Install Bun Dependencies
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: Install dependencies
         run: bun install
+
       - name: Build storybook
         run: bun run build-storybook
+
       - name: Upload Documents
         uses: actions/upload-pages-artifact@v3
         with:
