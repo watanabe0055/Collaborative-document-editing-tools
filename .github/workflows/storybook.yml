@@ -1,11 +1,9 @@
 name: Deploy Storybook to GitHub Pages
 
-# on:
-#   push:
-#     branches:
-#       - main
-
-on: pull_request
+on:
+  push:
+    branches:
+      - main
 
 env:
   WORKING_DIRECTORY: .
