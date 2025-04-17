@@ -3,11 +3,11 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { AlertCircle, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useActionState, useMemo, useState } from "react";
 import type { SignUpFormState } from "../action";
 import { passwordMatchSchema } from "@/app/zod/scheme";
+import ErrorCard from "@/components/ErrorCard/ErrorCard";
 
 const initialState: SignUpFormState = {
   errors: undefined,
@@ -46,18 +46,7 @@ const Form = ({
 
   return (
     <form action={formAction} className="space-y-4">
-      {state.errors && (
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription>
-            {state.errors.username && <p>{state.errors.username}</p>}
-            {state.errors.email && <p>{state.errors.email}</p>}
-            {state.errors.password && Array.isArray(state.errors.password)
-              ? state.errors.password.map((error) => <p key={error}>{error}</p>)
-              : state.errors.password && <p>{state.errors.password}</p>}
-          </AlertDescription>
-        </Alert>
-      )}
+      <ErrorCard errors={state.errors} />
       <div className="space-y-2">
         <Label htmlFor="username">ユーザー名</Label>
         <Input

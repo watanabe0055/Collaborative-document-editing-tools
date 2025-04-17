@@ -1,25 +1,39 @@
-import { createClient } from "@/app/utils/supabase/server";
+"use client";
+
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import clsx from "clsx";
-import { formSubmit } from "./action";
 import { Button } from "../ui/button";
+import { useActionState } from "react";
+import ErrorCard from "../ErrorCard/ErrorCard";
+import type { ChanelFormState } from "@/types/Form";
 
-const ChanelForm = async () => {
-  const supabase = await createClient();
-  const {
-    data: { session },
-    error,
-  } = await supabase.auth.getSession();
-  const user = session?.user;
+const initialState: ChanelFormState = {
+  errors: undefined,
+  success: undefined,
+};
+
+const ChanelForm = ({
+  formSubmit,
+}: {
+  formSubmit: (formData: FormData) => Promise<ChanelFormState>;
+}) => {
+  const [state, formAction, isPending] = useActionState(
+    async (_prevState: ChanelFormState, formData: FormData) => {
+      // サーバーアクションを呼び出し、状態を返す
+      return await formSubmit(formData);
+    },
+    initialState
+  );
 
   return (
-    <form action={formSubmit} className={clsx("max-w-md mx-auto")}>
+    <form action={formAction} className={clsx("max-w-md mx-auto")}>
+      <ErrorCard errors={state.errors} />
       <Label htmlFor="title">チャンネル名</Label>
-      <Input id="title" name="title" type="text" required />
+      <Input id="title" name="title" type="text" />
       <Label htmlFor="explanation">説明</Label>
-      <Input id="explanation" name="explanation" type="text" required />
-      <Button type="submit">作成</Button>
+      <Input id="explanation" name="explanation" type="text" />
+      <Button type="submit">{isPending ? "作成中..." : "作成"}</Button>
     </form>
   );
 };

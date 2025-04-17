@@ -1,5 +1,4 @@
 import { createClient } from "@/app/utils/supabase/server";
-import ChanelForm from "../ChanelForm/ChanelForm";
 
 /**
  * チャンネル一覧を表示するコンポーネント
@@ -32,7 +31,6 @@ const ChanelIndex = async () => {
       {data?.map((item) => (
         <div key={item.chanel_id}>{item.channel_room.title}</div>
       ))}
-      <ChanelForm />
     </>
   );
 };

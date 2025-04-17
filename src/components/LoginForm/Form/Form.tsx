@@ -7,9 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { LoginFormState } from "@/components/LoginForm/action";
-
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { AlertCircle, Asterisk } from "lucide-react";
+import { Asterisk } from "lucide-react";
+import ErrorCard from "@/components/ErrorCard/ErrorCard";
 
 /**
  * フォームの初期状態
@@ -39,17 +38,7 @@ const Form = ({
 
   return (
     <form action={formAction} className="space-y-4">
-      {state.errors && (
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription>
-            {state.errors.email && <p>{state.errors.email}</p>}
-            {state.errors.password && Array.isArray(state.errors.password)
-              ? state.errors.password.map((error) => <p key={error}>{error}</p>)
-              : state.errors.password && <p>{state.errors.password}</p>}
-          </AlertDescription>
-        </Alert>
-      )}
+      <ErrorCard errors={state.errors} />
       <div className="space-y-2">
         <Label htmlFor="email" className="gap-0.5">
           <Asterisk />
