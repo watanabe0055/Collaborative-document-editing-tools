@@ -1,3 +1,4 @@
+import type { Database } from "@/supabase/generated-schema";
 import { createBrowserClient } from "@supabase/ssr";
 
 export function createClient() {
@@ -8,5 +9,5 @@ export function createClient() {
     throw new Error("Supabase環境変数が設定されていません");
   }
 
-  return createBrowserClient(supabaseUrl, supabaseAnonKey);
+  return createBrowserClient<Database>(supabaseUrl, supabaseAnonKey);
 }

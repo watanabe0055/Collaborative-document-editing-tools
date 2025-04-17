@@ -7,8 +7,6 @@ export default async function Home() {
   return (
     <>
       <LogoutButton />
-      {/* <LoginForm /> */}
-      {/* <SignupForm /> */}
       <ChanelIndex />
     </>
   );
