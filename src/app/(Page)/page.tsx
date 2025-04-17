@@ -1,8 +1,7 @@
 "use server";
 
-import { LoginForm } from "@/components/LoginForm/LoginForm";
-import { LogoutButton } from "../../components/LogoutButton/LogoutButton";
-import { SignupForm } from "@/components/SignUpForm/SignupForm";
+import ChanelIndex from "@/components/ChanelIndex/ChanelIndex";
+import LogoutButton from "../../components/LogoutButton/LogoutButton";
 
 export default async function Home() {
   return (
@@ -10,6 +9,7 @@ export default async function Home() {
       <LogoutButton />
       {/* <LoginForm /> */}
       {/* <SignupForm /> */}
+      <ChanelIndex />
     </>
   );
 }

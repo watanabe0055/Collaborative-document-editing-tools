@@ -1,6 +1,6 @@
 "use server";
 
-import { SignupForm } from "@/components/SignUpForm/SignupForm";
+import SignupForm from "@/components/SignUpForm/SignupForm";
 
 export default async function SignupPage() {
   return (
