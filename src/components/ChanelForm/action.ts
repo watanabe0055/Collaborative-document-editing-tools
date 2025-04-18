@@ -17,7 +17,10 @@ export const formSubmit = async (formData: FormData) => {
   // バリデーション実行
   const validation = chanelSchema.safeParse({ title, explanation });
   if (!validation.success) {
-    return { errors: validation.error.flatten().fieldErrors };
+    return {
+      data: { title, explanation },
+      errors: validation.error.flatten().fieldErrors,
+    };
   }
 
   // ユーザーID取得
@@ -38,7 +41,10 @@ export const formSubmit = async (formData: FormData) => {
     .single();
 
   if (channelError || !channelData?.id) {
-    return { errors: { title: ["チャンネルの作成に失敗しました"] } };
+    return {
+      data: { title, explanation },
+      errors: { title: ["チャンネルの作成に失敗しました"] },
+    };
   }
   const channelId = channelData.id;
 
@@ -49,6 +55,7 @@ export const formSubmit = async (formData: FormData) => {
 
   if (userChanelError) {
     return {
+      data: { title, explanation },
       errors: { title: ["ユーザーとチャンネルの紐付けに失敗しました"] },
     };
   }

@@ -31,9 +31,19 @@ const ChanelForm = ({
     <form action={formAction} className={clsx("max-w-md mx-auto")}>
       <ErrorCard errors={state.errors} />
       <Label htmlFor="title">チャンネル名</Label>
-      <Input id="title" name="title" type="text" />
+      <Input
+        id="title"
+        name="title"
+        type="text"
+        defaultValue={state.data?.title}
+      />
       <Label htmlFor="explanation">説明</Label>
-      <Input id="explanation" name="explanation" type="text" />
+      <Input
+        id="explanation"
+        name="explanation"
+        type="text"
+        defaultValue={state.data?.explanation}
+      />
       <Button type="submit">{isPending ? "作成中..." : "作成"}</Button>
     </form>
   );
