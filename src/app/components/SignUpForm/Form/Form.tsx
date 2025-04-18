@@ -1,13 +1,13 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
+import { Input } from "@/app/components/ui/input";
+import { Label } from "@/app/components/ui/label";
+import { Button } from "@/app/components/ui/button";
 import { X } from "lucide-react";
 import { useActionState, useMemo, useState } from "react";
 import type { SignUpFormState } from "../action";
 import { passwordMatchSchema } from "@/app/zod/scheme";
-import ErrorCard from "@/components/ErrorCard/ErrorCard";
+import ErrorCard from "@/app/components/ErrorCard/ErrorCard";
 
 const initialState: SignUpFormState = {
   errors: undefined,

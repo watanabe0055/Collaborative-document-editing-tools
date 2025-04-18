@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { useActionState } from "react";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import type { LoginFormState } from "@/components/LoginForm/action";
+import { Button } from "@/app/components/ui/button";
+import { Input } from "@/app/components/ui/input";
+import { Label } from "@/app/components/ui/label";
+import type { LoginFormState } from "@/app/components/LoginForm/action";
 import { Asterisk } from "lucide-react";
-import ErrorCard from "@/components/ErrorCard/ErrorCard";
+import ErrorCard from "@/app/components/ErrorCard/ErrorCard";
 
 /**
  * フォームの初期状態

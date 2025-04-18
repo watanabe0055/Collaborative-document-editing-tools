@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import LogoutButton from "@/components/LogoutButton/LogoutButton";
+import LogoutButton from "@/app/components/LogoutButton/LogoutButton";
 
 const meta: Meta<typeof LogoutButton> = {
   title: "Components/LogoutButton",
