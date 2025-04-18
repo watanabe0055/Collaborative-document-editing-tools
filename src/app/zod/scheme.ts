@@ -95,7 +95,7 @@ export const passwordMatchSchema = z
   });
 
 // バリデーションスキーマ
-export const chanelSchema = z.object({
+export const channelSchema = z.object({
   title: z.string().min(1, "タイトルは1文字以上で入力してください"),
   explanation: z.string().min(1, "説明は1文字以上で入力してください"),
 });
