@@ -1,9 +1,7 @@
 "use server";
 
-import ChanelIndex from "@/components/ChanelIndex/ChanelIndex";
+import ChanelComponent from "@/components/Parts/ChanelComponent/ChanelComponent";
 import LogoutButton from "../../components/LogoutButton/LogoutButton";
-import ChanelForm from "@/components/ChanelForm/ChanelForm";
-import { formSubmit } from "@/components/ChanelForm/action";
 // import { createClient } from "@/app/utils/supabase/server";
 
 /**
@@ -21,8 +19,7 @@ export default async function Home() {
   return (
     <>
       <LogoutButton />
-      <ChanelIndex />
-      <ChanelForm formSubmit={formSubmit} />
+      <ChanelComponent />
     </>
   );
 }

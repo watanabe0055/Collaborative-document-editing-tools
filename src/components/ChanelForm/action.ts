@@ -1,5 +1,5 @@
 import { createClient } from "@/app/utils/supabase/server";
-import { z } from "zod";
+import { chanelSchema } from "@/app/zod/scheme";
 
 /**
  * チャンネル作成フォームのサブミット処理
@@ -9,12 +9,6 @@ import { z } from "zod";
 export const formSubmit = async (formData: FormData) => {
   "use server";
   const supabase = await createClient();
-
-  // バリデーションスキーマ
-  const chanelSchema = z.object({
-    title: z.string().min(1, "タイトルは1文字以上で入力してください"),
-    explanation: z.string().min(1, "説明は1文字以上で入力してください"),
-  });
 
   // フォーム値取得
   const title = formData.get("title")?.toString() ?? "";
@@ -29,7 +23,10 @@ export const formSubmit = async (formData: FormData) => {
   // ユーザーID取得
   const { data: userData, error: userError } = await supabase.auth.getUser();
   if (userError || !userData?.user) {
-    return { errors: { title: ["ユーザー情報の取得に失敗しました"] } };
+    return {
+      data: { title, explanation },
+      errors: { title: ["ユーザー情報の取得に失敗しました"] },
+    };
   }
   const userId = userData.user.id;
 

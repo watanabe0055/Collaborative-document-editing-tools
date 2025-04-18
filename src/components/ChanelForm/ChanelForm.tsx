@@ -25,6 +25,7 @@ const ChanelForm = ({
     },
     initialState
   );
+  console.log(state);
 
   return (
     <form action={formAction} className={clsx("max-w-md mx-auto")}>
