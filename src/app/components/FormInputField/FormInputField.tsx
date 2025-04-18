@@ -1,6 +1,7 @@
 import type { JSX } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
+import type { FormInputFieldProps } from "@/types/Form";
 
 /**
  * フォーム用の共通インプットフィールドコンポーネント
@@ -37,29 +38,3 @@ const FormInputField = ({
 );
 
 export default FormInputField;
-
-/**
- * フォームインプットフィールドのプロパティ型
- */
-export type FormInputFieldProps = {
-  /** input要素のid属性 */
-  readonly id: string;
-  /** input要素のname属性 */
-  readonly name: string;
-  /** ラベルとして表示するテキスト */
-  readonly label: string;
-  /** input要素のtype属性 */
-  readonly type?: string;
-  /** input要素の値 */
-  readonly value?: string;
-  /** 値が変化したときのコールバック */
-  readonly onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  /** プレースホルダー */
-  readonly placeholder?: string;
-  /** 必須フィールドかどうか */
-  readonly required?: boolean;
-  /** オートコンプリート属性 */
-  readonly autoComplete?: string;
-  /** バリデーションエラー時のメッセージ */
-  readonly error?: string;
-};
