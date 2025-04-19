@@ -3,13 +3,11 @@
 import Link from "next/link";
 import { useActionState } from "react";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import type { LoginFormState } from "@/components/LoginForm/action";
-
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { AlertCircle, Asterisk } from "lucide-react";
+import { Button } from "@/app/components/ui/button";
+import type { LoginFormState } from "@/app/components/LoginForm/action";
+import { Asterisk } from "lucide-react";
+import ErrorCard from "@/app/components/ErrorCard/ErrorCard";
+import FormInputField from "../../FormInputField/FormInputField";
 
 /**
  * フォームの初期状態
@@ -39,37 +37,28 @@ const Form = ({
 
   return (
     <form action={formAction} className="space-y-4">
-      {state.errors && (
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription>
-            {state.errors.email && <p>{state.errors.email}</p>}
-            {state.errors.password && Array.isArray(state.errors.password)
-              ? state.errors.password.map((error) => <p key={error}>{error}</p>)
-              : state.errors.password && <p>{state.errors.password}</p>}
-          </AlertDescription>
-        </Alert>
-      )}
+      <ErrorCard errors={state.errors} />
       <div className="space-y-2">
-        <Label htmlFor="email" className="gap-0.5">
-          <Asterisk />
-          メールアドレス
-        </Label>
-        <Input
+        <FormInputField
           id="email"
           name="email"
           type="email"
           placeholder="name@example.com"
           required
           autoComplete="email"
+          label={"メールアドレス"}
         />
       </div>
       <div className="space-y-2">
+        <FormInputField
+          id="password"
+          name="password"
+          type="password"
+          required
+          autoComplete="current-password"
+          label={"パスワード"}
+        />
         <div className="flex items-center justify-between">
-          <Label htmlFor="password" className="gap-0.5">
-            <Asterisk />
-            パスワード
-          </Label>
           <Link
             href="/forgot-password"
             className="text-sm text-primary hover:underline"
@@ -77,13 +66,6 @@ const Form = ({
             パスワードをお忘れですか？
           </Link>
         </div>
-        <Input
-          id="password"
-          name="password"
-          type="password"
-          required
-          autoComplete="current-password"
-        />
       </div>
       <Button type="submit" className="w-full" disabled={isPending}>
         {isPending ? "送信中..." : "ログイン"}
