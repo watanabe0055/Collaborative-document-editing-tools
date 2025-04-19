@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/app/components/ui/button";
 import { LogOut } from "lucide-react";
 import { LogoutSubmit } from "./action";
 import { useTransition } from "react";
