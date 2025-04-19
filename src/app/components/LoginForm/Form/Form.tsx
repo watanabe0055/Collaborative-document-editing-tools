@@ -5,7 +5,6 @@ import { useActionState } from "react";
 
 import { Button } from "@/app/components/ui/button";
 import type { LoginFormState } from "@/app/components/LoginForm/action";
-import { Asterisk } from "lucide-react";
 import ErrorCard from "@/app/components/ErrorCard/ErrorCard";
 import FormInputField from "../../FormInputField/FormInputField";
 
