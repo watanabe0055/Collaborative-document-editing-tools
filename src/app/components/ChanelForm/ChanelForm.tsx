@@ -28,22 +28,42 @@ const ChanelForm = ({
   console.log(state);
 
   return (
-    <form action={formAction} className={clsx("")}>
+    <form action={formAction} className={clsx("flex", "flex-col", "space-y-6")}>
       <ErrorCard errors={state.errors} />
-      <Label htmlFor="title">チャンネル名</Label>
-      <Input
-        id="title"
-        name="title"
-        type="text"
-        defaultValue={state.data?.title}
-      />
-      <Label htmlFor="explanation">説明</Label>
-      <Input
-        id="explanation"
-        name="explanation"
-        type="text"
-        defaultValue={state.data?.explanation}
-      />
+      <div>
+        <Label
+          htmlFor="title"
+          className={clsx(state.errors?.title && "text-red-500")}
+        >
+          チャンネル名
+        </Label>
+        <Input
+          id="title"
+          name="title"
+          type="text"
+          className={clsx("w-full")}
+          defaultValue={state.data?.title}
+          required
+          placeholder="チャンネル名"
+        />
+      </div>
+      <div>
+        <Label
+          htmlFor="explanation"
+          className={clsx(state.errors?.explanation && "text-red-500")}
+        >
+          説明
+        </Label>
+        <Input
+          id="explanation"
+          name="explanation"
+          type="text"
+          className={clsx("w-full")}
+          defaultValue={state.data?.explanation}
+          required
+          placeholder="説明"
+        />
+      </div>
       <Button type="submit">{isPending ? "作成中..." : "作成"}</Button>
     </form>
   );
