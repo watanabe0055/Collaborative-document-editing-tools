@@ -28,7 +28,7 @@ const ChanelForm = ({
   console.log(state);
 
   return (
-    <form action={formAction} className={clsx("max-w-md mx-auto")}>
+    <form action={formAction} className={clsx("")}>
       <ErrorCard errors={state.errors} />
       <Label htmlFor="title">チャンネル名</Label>
       <Input
