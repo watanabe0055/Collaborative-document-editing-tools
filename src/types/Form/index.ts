@@ -8,6 +8,14 @@ export type ChanelFormState = {
 };
 
 /**
+ * チャンネルの型
+ */
+export type Channel = {
+  chanel_id: number;
+  channel_room: { title: string };
+};
+
+/**
  * フォームインプットフィールドのプロパティ型
  */
 export type FormInputFieldProps = {
