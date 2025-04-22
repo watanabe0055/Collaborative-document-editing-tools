@@ -1,6 +1,6 @@
 import React from "react";
 import { StoryFn, Meta } from "@storybook/react";
-import ChanelForm from "../../app/components/ChanelForm/ChanelForm";
+import ChanelForm from "../../app/components/ChannelForm/ChannelForm";
 
 const meta: Meta<typeof ChanelForm> = {
   title: "Components/ChanelForm",

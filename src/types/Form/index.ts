@@ -1,7 +1,7 @@
 /**
  * チャンネルフォームの状態型
  */
-export type ChanelFormState = {
+export type ChannelFormState = {
   errors?: { title?: string[]; explanation?: string[] };
   success?: boolean;
   data?: { title: string; explanation: string };

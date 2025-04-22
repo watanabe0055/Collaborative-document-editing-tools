@@ -6,20 +6,20 @@ import clsx from "clsx";
 import { Button } from "../ui/button";
 import { useActionState } from "react";
 import ErrorCard from "../ErrorCard/ErrorCard";
-import type { ChanelFormState } from "@/types/Form";
+import type { ChannelFormState } from "@/types/Form";
 
-const initialState: ChanelFormState = {
+const initialState: ChannelFormState = {
   errors: undefined,
   success: undefined,
 };
 
-const ChanelForm = ({
+const ChannelForm = ({
   formSubmit,
 }: {
-  formSubmit: (formData: FormData) => Promise<ChanelFormState>;
+  formSubmit: (formData: FormData) => Promise<ChannelFormState>;
 }) => {
   const [state, formAction, isPending] = useActionState(
-    async (_prevState: ChanelFormState, formData: FormData) => {
+    async (_prevState: ChannelFormState, formData: FormData) => {
       // サーバーアクションを呼び出し、状態を返す
       return await formSubmit(formData);
     },
@@ -69,4 +69,4 @@ const ChanelForm = ({
   );
 };
 
-export default ChanelForm;
+export default ChannelForm;
