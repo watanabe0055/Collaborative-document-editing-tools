@@ -1,6 +1,6 @@
 "use server";
 
-import ChanelComponent from "@/app/components/Parts/ChanelComponent/ChanelComponent";
+import ChanelComponent from "@/app/components/Parts/ChanelComponent/ChannelComponent";
 import LogoutButton from "../components/LogoutButton/LogoutButton";
 // import { createClient } from "@/app/utils/supabase/server";
 

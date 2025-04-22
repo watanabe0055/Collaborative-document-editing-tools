@@ -1,13 +1,12 @@
 "use client";
 
-import React from "react";
 import { useChanelIndex } from "./use-chanel";
 
 /**
  * チャンネル一覧を表示するコンポーネント
  * @returns {JSX.Element}
  */
-const ChanelIndex = () => {
+const ChannelIndex = () => {
   const channels = useChanelIndex();
 
   if (!channels) return <div>読み込み中...</div>;
@@ -22,4 +21,4 @@ const ChanelIndex = () => {
   );
 };
 
-export default ChanelIndex;
+export default ChannelIndex;
