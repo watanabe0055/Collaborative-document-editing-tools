@@ -19,5 +19,5 @@ Default.args = {
   title: "ダイアログのタイトル",
   dialogTriggerText: "ダイアログを開く",
   description: "ダイアログの説明",
-  isShowHeader: true,
+  isShowFooter: true,
 };

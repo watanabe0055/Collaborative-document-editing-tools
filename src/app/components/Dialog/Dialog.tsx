@@ -20,7 +20,7 @@ type DialogCloseButtonProps = {
   title?: string;
   dialogTriggerText: string;
   description?: string;
-  isShowHeader?: boolean;
+  isShowFooter?: boolean;
   children: React.ReactNode;
 };
 
@@ -34,7 +34,7 @@ export function DialogCloseButton({
   dialogTriggerText,
   description,
   children,
-  isShowHeader = false,
+  isShowFooter = false,
 }: DialogCloseButtonProps) {
   return (
     <Dialog>
@@ -47,7 +47,7 @@ export function DialogCloseButton({
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         {children}
-        {isShowHeader && (
+        {isShowFooter && (
           <DialogFooter className="sm:justify-start">
             <DialogClose asChild>
               <Button type="button" variant="secondary">
